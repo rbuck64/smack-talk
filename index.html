@@ -8,6 +8,10 @@
 </head>	
 <body>
 	<h1>Hello World</h1>
+
+	{{ range .Teams }}
+		<p> {{ .Name }} - {{ .ID }}</p>
+	{{ end }}
 </body>	
 </html>
 
