@@ -15,28 +15,34 @@ type Member struct {
 	IsLeagueManager bool   `json:"isLeagueManager"`
 }
 
+type Team struct {
+	Abbrev   string   `json:"abbrev"`
+	ID       int      `json:"id"`
+	Location string   `json:"location"`
+	Nickname string   `json:"nickname"`
+	Owners   []string `json:"owners"`
+}
+
+type LeagueStatus struct {
+	CurrentMatchupPeriod int  `json:"currentMatchupPeriod"`
+	IsActive             bool `json:"isActive"`
+	LatestScoringPeriod  int  `json:"latestScoringPeriod"`
+}
+
+type LeagueSettings struct {
+	Name string `json:"name"`
+}
+
 type LeagueAPIResponse []struct {
-	GameID          int      `json:"gameId"`
-	ID              int      `json:"id"`
-	Members         []Member `json:"members"`
-	ScoringPeriodID int      `json:"scoringPeriodId"`
-	SeasonID        int      `json:"seasonId"`
-	SegmentID       int      `json:"segmentId"`
-	Settings        struct {
-		Name string `json:"name"`
-	} `json:"settings"`
-	Status struct {
-		CurrentMatchupPeriod int  `json:"currentMatchupPeriod"`
-		IsActive             bool `json:"isActive"`
-		LatestScoringPeriod  int  `json:"latestScoringPeriod"`
-	} `json:"status"`
-	Teams []struct {
-		Abbrev   string   `json:"abbrev"`
-		ID       int      `json:"id"`
-		Location string   `json:"location"`
-		Nickname string   `json:"nickname"`
-		Owners   []string `json:"owners"`
-	} `json:"teams"`
+	GameID          int            `json:"gameId"`
+	ID              int            `json:"id"`
+	Members         []Member       `json:"members"`
+	ScoringPeriodID int            `json:"scoringPeriodId"`
+	SeasonID        int            `json:"seasonId"`
+	SegmentID       int            `json:"segmentId"`
+	Settings        LeagueSettings `json:"settings"`
+	Status          LeagueStatus   `json:"status"`
+	Teams           []Team         `json:"teams"`
 }
 
 func main() {
