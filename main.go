@@ -20,7 +20,7 @@ func main() {
 	h1 := func(w http.ResponseWriter, r *http.Request) {
 		temp := template.Must(template.ParseFiles("index.html"))
 
-		res, error := http.Get("https://fantasy.espn.com/apis/v3/games/ffl/leagueHistory/1868315?seasonId=2022")
+		res, error := http.Get("https://fantasy.espn.com/apis/v3/games/ffl/seasons/2023/segments/0/leagues/1868315")
 		if error != nil {
 			log.Fatal(error)
 		}
