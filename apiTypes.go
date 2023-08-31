@@ -24,7 +24,7 @@ type LeagueSettings struct {
 	Name string `json:"name"`
 }
 
-type LeagueAPIResponse []struct {
+type LeagueAPIResponse struct {
 	GameID          int            `json:"gameId"`
 	ID              int            `json:"id"`
 	Members         []Member       `json:"members"`

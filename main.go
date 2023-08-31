@@ -45,7 +45,7 @@ func main() {
 			"Teams": {{DisplayName: "Kowski Krew", ID: "asdlkfj;as", IsLeagueManager: true}},
 		}
 
-		teams["Teams"] = leagueAPIResponse[0].Members
+		teams["Teams"] = leagueAPIResponse.Members
 
 		temp.Execute(w, teams)
 	}
