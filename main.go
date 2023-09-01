@@ -29,7 +29,7 @@ func main() {
 	// }
 	// http.HandleFunc("/leagueMembers", getLeaugeMembersHandler)
 
-	h1 := func(w http.ResponseWriter, r *http.Request) {
+	baseURLHandler := func(w http.ResponseWriter, r *http.Request) {
 		temp := template.Must(template.ParseFiles("index.html"))
 
 		res, error := http.Get("https://fantasy.espn.com/apis/v3/games/ffl/seasons/2023/segments/0/leagues/1868315")
@@ -66,7 +66,7 @@ func main() {
 		temp.Execute(w, str)
 	}
 
-	http.HandleFunc("/", h1)
+	http.HandleFunc("/", baseURLHandler)
 	log.Fatal(http.ListenAndServe(":8000", nil))
 }
 
