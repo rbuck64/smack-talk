@@ -60,13 +60,21 @@ func main() {
 		teams["Teams"] = leagueAPIResponse.Members
 
 		temp.Execute(w, teams)
+	}
 
-		str := getOpenAICall()
-		fmt.Println(str)
-		temp.Execute(w, str)
+	getSmackTalkHandler := func(w http.ResponseWriter, r *http.Request) {
+		log.Print("HTMX request received!")
+		log.Print(r.Header.Get("HX-Request"))
+
+		htmlStr := fmt.Sprintf("<h2>This is a random fact from OpenAI</h2>")
+		tmpl, _ := template.New("t").Parse(htmlStr)
+
+		tmpl.Execute(w, nil)
 	}
 
 	http.HandleFunc("/", baseURLHandler)
+	http.HandleFunc("/get-smack-talk/", getSmackTalkHandler)
+
 	log.Fatal(http.ListenAndServe(":8000", nil))
 }
 
