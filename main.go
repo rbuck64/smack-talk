@@ -10,24 +10,8 @@ import (
 	"net/http"
 )
 
-/*
-curl https://api.openai.com/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer \
-  -d '{
-     "model": "gpt-3.5-turbo",
-     "messages": [{"role": "user", "content": "Say this is a test!"}],
-     "temperature": 0.7
-   }'
-*/
-
 func main() {
 	fmt.Println("Hello World!")
-
-	// // https://fantasy.espn.com/apis/v3/games/ffl/leagueHistory/1868315?seasonId=2022&view=mTeam
-	// getLeaugeMembersHandler := func(w http.ResponseWriter, r *http.Request) {
-	// }
-	// http.HandleFunc("/leagueMembers", getLeaugeMembersHandler)
 
 	baseURLHandler := func(w http.ResponseWriter, r *http.Request) {
 		temp := template.Must(template.ParseFiles("index.html"))
