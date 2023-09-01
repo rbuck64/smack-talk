@@ -63,10 +63,11 @@ func main() {
 	}
 
 	getSmackTalkHandler := func(w http.ResponseWriter, r *http.Request) {
+
 		log.Print("HTMX request received!")
 		log.Print(r.Header.Get("HX-Request"))
 
-		htmlStr := fmt.Sprintf("<h2>This is a random fact from OpenAI</h2>")
+		htmlStr := fmt.Sprintf("<h2> %s </h2>", getOpenAICall())
 		tmpl, _ := template.New("t").Parse(htmlStr)
 
 		tmpl.Execute(w, nil)
@@ -78,8 +79,9 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8000", nil))
 }
 
-func getOpenAICall() map[string]string {
+func getOpenAICall() string {
 	fmt.Println("Doing the API Call")
+
 	requestBody := []byte(`{
 		"model": "gpt-3.5-turbo",
 		"messages": [{"role": "user", "content": "Give me a random fact."}],
@@ -118,13 +120,5 @@ func getOpenAICall() map[string]string {
 		log.Fatal(error)
 	}
 
-	fmt.Println(string(completionResponse.Choices[0].Message.Content))
-
-	completion := map[string]string{
-		"Completion": "Hello There!",
-	}
-
-	completion["Completion"] = completionResponse.Choices[0].Message.Content
-
-	return completion
+	return completionResponse.Choices[0].Message.Content
 }
